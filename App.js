@@ -1,20 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
+import { useFonts } from "expo-font";
+import { StatusBar } from "expo-status-bar";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import fonts from "./config/fonts";
+import Navigation from "./navigation";
+import store from "./store/store";
+import { Provider } from "react-redux";
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+  const [fontsLoaded] = useFonts(fonts);
+  return !fontsLoaded ? null : (
+
+    <Provider store={store}>
+      <SafeAreaProvider>
+        <Navigation />
+        <StatusBar />
+      </SafeAreaProvider>
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
